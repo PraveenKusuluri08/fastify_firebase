@@ -16,6 +16,8 @@
   "dependencies": {
     "@fastify/cors": "^8.1.0",
     "@fastify/swagger": "^7.6.1",
+    "@types/node": "^18.8.2",
+    "dotenv": "^16.0.3",
     "fastify": "^4.7.0",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.24.1"
