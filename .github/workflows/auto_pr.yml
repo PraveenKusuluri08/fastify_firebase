@@ -9,13 +9,13 @@ jobs:
       runs-on: ubuntu-latest
     steps:
       - name: Checking the refactored code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Extract git commit data
-        uses: fastify_firebase/git-commit-data-action@v1.x
+      - uses: fastify_firebase/git-commit-data-action@v1.x
 
       - name: update author information
-        run: echo ${{env.GIT_COMMIT_AUTHOR_NAME}} > AUTHOR
+      - run: echo ${{env.GIT_COMMIT_AUTHOR_NAME}} > AUTHOR
 
       - name: Raise PR
       - uses: peter-evans/create-pull-request@v4
