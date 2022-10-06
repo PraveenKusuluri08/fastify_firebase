@@ -1,7 +1,22 @@
-import * as functions from "firebase-functions";
-import * as express from "express";
+const functions = require('firebase-functions')
+const http = require('http')
+const Fastify = require('fastify')
 
-exports.helloWorld = functions.https.onRequest((request:express.Request, response:express.Response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
-});
+let handleRequest:any
+
+const serverFactory = (handler:any, opts:any) => {
+  handleRequest = handler
+  return http.createServer()
+}
+const fastify = Fastify({serverFactory})
+
+fastify.get('/', (req:any, reply:any) => {
+  reply.send({ hello: 'world' })
+})
+
+exports.api = functions.https.onRequest((req:any, res:any) => {
+  fastify.ready((err:Error) => {
+    if (err) throw err
+    handleRequest(req, res)
+  })
+})
